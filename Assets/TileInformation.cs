@@ -11,7 +11,8 @@ public class TileInformation : MonoBehaviour
         TileIsOption,
         TileNotOptions,
         TileVisted,
-        TileBlocked
+        TileBlocked,
+        TileOnPath
     }
     [SerializeField]
     private TileState currentState;
@@ -42,6 +43,10 @@ public class TileInformation : MonoBehaviour
             {
                 GetComponent<Renderer>().material.color = Color.black;
             }
+            else if (value == TileState.TileOnPath)
+            {
+                GetComponent<Renderer>().material.color = Color.magenta;
+            }
             else
             {
                 Debug.LogError("TileState being set to invalid state");
@@ -52,6 +57,11 @@ public class TileInformation : MonoBehaviour
     [field: SerializeField]
     public TextMeshProUGUI textBox
     { get; set; }
+
+    public GameObject TileParent
+    { get; set; } = null;
+    public int CostFromStartCount
+    { get; set; } = 0;
 
     // Start is called before the first frame update
     void Start()
